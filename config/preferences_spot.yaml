@@ -1,0 +1,79 @@
+# ===========================================
+# Spot Trading Strategy Preferences (Testnet)
+# ===========================================
+
+trading_strategy:
+  # Futures settings
+  enable_futures: false
+  leverage: 1
+  margin_mode: ISOLATED
+
+  # Risk tolerance levels (choose one)
+  risk_level: moderate  # Options: conservative | moderate | aggressive
+  
+  # Position Sizing
+  max_position_size_pct: 10  # Maximum % of portfolio per single trade
+  
+  # Stop Loss / Take Profit settings (percentage)
+  stop_loss_pct: 5   # Automatic stop loss trigger
+  take_profit_pct: 8 # Automatic take profit trigger
+  
+  # Trailing stop settings
+  trailing_stop_enabled: true
+  trailing_stop_distance_pct: 3
+
+monitoring:
+  refresh_interval_seconds: 30    # How often to check market prices
+  report_interval_hours: 1        # How often to send status report (hours)
+  alert_threshold_pct: 2          # Alert if price moves >2% in an hour
+  
+  # Market hours (UTC)
+  trading_hours:
+    start: "00:00"
+    end: "24:00"
+
+analysis:
+  timeframe: "1h"  # Default analysis timeframe (1h, 4h, 1d)
+  
+  indicators:
+    - rsi
+    - macd
+    - bollinger_bands
+    - ema
+    - moving_average_convergence
+  
+  chart_patterns:
+    enabled: true
+    patterns:
+      - head_and_shoulders
+      - double_top_bottom
+      - triangle
+      - flag
+      - wedge
+
+execution:
+  default_order_type: limit     # Options: market | limit | stop-limit
+  slippage_tolerance_pct: 0.5   # Maximum acceptable slippage
+  
+  order_retry_attempts: 3        # How many times to retry failed orders
+  order_retry_delay_seconds: 10
+
+risk_management:
+  max_daily_loss_pct: 2         # Stop trading if daily loss >2%
+  max_drawdown_pct: 7          # Stop trading if drawdown >7% from peak
+  
+  position_limits:
+    single_coin_max_pct: 25     # Max % of portfolio in one coin
+    total_leverage_max: 1x      # Spot has no leverage
+
+notifications:
+  channels:
+    - telegram           # Primary channel for alerts
+    - email              # Optional: add if needed
+  
+  alert_types:
+    price_breakout: true        # Alert on support/resistance breakouts
+    signal_generated: true      # Alert when buy/sell signals appear
+    risk_warning: true          # Alert on risk threshold breaches
+    api_error: true             # Alert on API failures
+    daily_report: false         # Daily summary (optional)

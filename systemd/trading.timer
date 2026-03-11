@@ -1,0 +1,18 @@
+[Unit]
+Description=Crypto Trading Monitor Periodic Service
+Requires=trading.service
+After=network.target
+
+[Timer]
+# 每 5 分钟运行一次市场检查
+OnBootSec=2min
+OnUnitActiveSec=5min
+
+# 系统重启后继续运行
+Persistent=true
+
+# 提高准确性
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

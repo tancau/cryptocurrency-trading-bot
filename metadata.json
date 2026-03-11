@@ -1,0 +1,11 @@
+{
+  "name": "cryptocurrency-trading",
+  "version": "1.0.0",
+  "description": "Automated cryptocurrency trading bot supporting Binance Spot/Futures (Testnet & Live) with technical analysis and risk management.",
+  "author": "OpenClaw User",
+  "category": "finance",
+  "tags": ["trading", "crypto", "binance", "bot", "python"],
+  "entry_point": "main_control.py",
+  "requirements": ["python>=3.10", "ccxt", "pandas", "numpy", "pyyaml"],
+  "permissions": ["network", "filesystem"]
+}

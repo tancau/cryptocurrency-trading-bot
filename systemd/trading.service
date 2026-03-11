@@ -1,0 +1,41 @@
+[Unit]
+Description=Crypto Trading Monitor Service - Auto-Runtime 🤖💎
+After=network.target network-online.target
+Requires=network-online.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=tancau
+Group=tancau
+# 工作目录
+WorkingDirectory=/home/tancau/.openclaw/workspace/skills/cryptocurrency-trading
+# Python 环境和路径
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONUNBUFFERED=1"
+ExecStart=/usr/bin/python3 /home/tancau/.openclaw/workspace/skills/cryptocurrency-trading/main_control.py
+# 自动重启配置
+Restart=always
+RestartSec=10
+# 内存和 CPU 限制
+MemoryLimit=512M
+CPUQuota=80%
+# 网络和安全限制
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/tancau/.openclaw/workspace/skills/cryptocurrency-trading/logs /home/tancau/.openclaw/workspace/skills/cryptocurrency-trading/runs
+# 日志记录
+StandardOutput=journal+console
+StandardError=journal+console
+SyslogIdentifier=trading-service
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=multi-user.target timers.target
